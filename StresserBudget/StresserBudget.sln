@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.27004.2008
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StresserBudget", "StresserBudget\StresserBudget.csproj", "{573D7D48-7036-458D-8FE5-7414F2D4EB1D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{BC67B475-3199-4000-9FC1-1317ADFCA65F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic", "Logic\Logic.csproj", "{04129369-B894-4515-9386-789A4F164AAA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{573D7D48-7036-458D-8FE5-7414F2D4EB1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{573D7D48-7036-458D-8FE5-7414F2D4EB1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{573D7D48-7036-458D-8FE5-7414F2D4EB1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC67B475-3199-4000-9FC1-1317ADFCA65F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC67B475-3199-4000-9FC1-1317ADFCA65F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC67B475-3199-4000-9FC1-1317ADFCA65F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC67B475-3199-4000-9FC1-1317ADFCA65F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04129369-B894-4515-9386-789A4F164AAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04129369-B894-4515-9386-789A4F164AAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04129369-B894-4515-9386-789A4F164AAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04129369-B894-4515-9386-789A4F164AAA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
