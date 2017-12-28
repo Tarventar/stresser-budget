@@ -32,6 +32,18 @@ namespace Logic.DataManagers
             return lResult;
         }
 
+        internal void Reload(DauerauftragVm aDauerauftragVm)
+        {
+            if (aDauerauftragVm.Id < 0)
+            {
+                return;
+            }
+
+            // Reload from Database
+            var lRow = mDb.Dauerauftrag.GetSingleRow(aDauerauftragVm.Id, false);
+            aDauerauftragVm.Row = lRow;
+        }
+
         internal void SaveDauerauftrag(DauerauftragVm aDauerauftragVm)
         {
             if (!aDauerauftragVm.Validate().IsValid)

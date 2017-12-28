@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="StresserBudget.Components.KontoControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:StresserBudget.Components"
+             mc:Ignorable="d" 
+             d:DesignHeight="40" d:DesignWidth="300"
+             Loaded="UserControl_Loaded">
+    <StackPanel Orientation="Vertical" Margin="5">
+        <DockPanel Style="{StaticResource StdDockPanel}">
+            <TextBlock Style="{StaticResource StdTextBlock}">Konto</TextBlock>
+            <Button x:Name="mBtnAddKonto" 
+                    Style="{StaticResource btnAddEntry}"
+                    DockPanel.Dock="Right"
+                    Margin="5,0,0,0"
+                    IsTabStop="False"
+                    Click="mBtnAddKonto_Click">
+                <Button.Content>
+                    <Image Source="/Resources/add.png" Style="{StaticResource btnImage}" />
+                </Button.Content>
+            </Button>
+            <ComboBox x:Name="mCmbKonto" 
+                      IsEditable="False" 
+                      DisplayMemberPath="Bezeichnung"
+                      SelectionChanged="mCmbKonto_SelectionChanged">
+            </ComboBox>
+        </DockPanel>
+    </StackPanel>
+</UserControl>

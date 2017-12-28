@@ -1,0 +1,72 @@
+﻿<Window x:Class="StresserBudget.Dialogs.EditDauerauftragDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StresserBudget.Dialogs"
+        xmlns:vr="clr-namespace:SdaWpfLib.ValidationRules;assembly=SdaWpfLib"
+        mc:Ignorable="d"
+        Title="Dauerauftrag" Height="210" Width="300"
+        WindowStartupLocation="CenterOwner"
+        Loaded="Window_Loaded"
+        PreviewKeyDown="Window_PreviewKeyDown">
+    <StackPanel Orientation="Vertical" Margin="5">
+        <DockPanel Style="{StaticResource StdDockPanel}">
+            <TextBlock Style="{StaticResource StdTextBlock}">Bezeichnung *</TextBlock>
+            <TextBox x:Name="mTxtBezeichnung">
+                <TextBox.Text>
+                    <Binding Path="Bezeichnung">
+                        <Binding.ValidationRules>
+                            <vr:RequiredRule/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+        </DockPanel>
+
+        <DockPanel Style="{StaticResource StdDockPanel}">
+            <TextBlock Style="{StaticResource StdTextBlock}">Startdatum *</TextBlock>
+            <DatePicker x:Name="mDtpGueltigAb" SelectedDate="{Binding GueltigAb}" />
+        </DockPanel>
+
+        <DockPanel Style="{StaticResource StdDockPanel}">
+            <TextBlock Style="{StaticResource StdTextBlock}">Enddatum *</TextBlock>
+            <DatePicker x:Name="mDtpGueltigBis" SelectedDate="{Binding GueltigBis}" />
+        </DockPanel>
+
+        <DockPanel Style="{StaticResource StdDockPanel}">
+            <TextBlock Style="{StaticResource StdTextBlock}">Lauftag *</TextBlock>
+            <TextBox x:Name="mTxtLauftag" Validation.ErrorTemplate="{StaticResource validationErrorTemplate}" Style="{StaticResource ErrVal}">
+                <TextBox.Text>
+                    <Binding Path="Lauftag">
+                        <Binding.ValidationRules>
+                            <vr:IntMinMaxRule ValidatesOnTargetUpdated="True" AllowNull="False" MinValue="1" MaxValue="28"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+        </DockPanel>
+
+        <DockPanel Style="{StaticResource StdDockPanel}">
+            <TextBlock Style="{StaticResource StdTextBlock}">Betrag *</TextBlock>
+            <TextBox x:Name="mTxtBetrag" Validation.ErrorTemplate="{StaticResource validationErrorTemplate}" Style="{StaticResource ErrVal}">
+                <TextBox.Text>
+                    <Binding Path="BetragDisplay">
+                        <Binding.ValidationRules>
+                            <vr:DoubleMinMaxRule ValidatesOnTargetUpdated="True" AllowNull="False"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+        </DockPanel>
+
+        <DockPanel Style="{StaticResource StdDockPanel}" LastChildFill="False">
+            <Button x:Name="mBtnOk" DockPanel.Dock="Right" Click="mBtnOk_Click">
+                <Image Source="/Resources/Okay.png" Style="{StaticResource btnImage}"/>
+            </Button>
+            <Button x:Name="mBtnCancel" DockPanel.Dock="Right" Margin="0,0,5,0" IsCancel="True">
+                <Image Source="/Resources/Cancel.png" Style="{StaticResource btnImage}"/>
+            </Button>
+        </DockPanel>
+    </StackPanel>
+</Window>

@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="StresserBudget.Components.BudgetListControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:StresserBudget.Components"
+             xmlns:sdacontrols="clr-namespace:SdaWpfLib.Controls;assembly=SdaWpfLib"
+             mc:Ignorable="d" 
+             d:DesignHeight="150" d:DesignWidth="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <sdacontrols:SingleSelectionDataGrid x:Name="mDtgBudgets" Style="{StaticResource gridStdView}"
+                  Grid.Row="0"
+                  SelectionMode="Single"
+                  SingleSelectionChanged="mDtgBudgets_SingleSelectionChanged"
+                  MouseDoubleClick="mDtgBudgets_MouseDoubleClick">
+            <DataGrid.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="{x:Static SystemColors.HighlightColor}"/>
+                <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}" Color="{x:Static SystemColors.HighlightTextColor}"/>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Bezeichnung" IsReadOnly="True" Width="*"
+                                    Binding="{Binding Bezeichnung, Mode=OneWay}"
+                                    SortDirection="Ascending"/>
+            </DataGrid.Columns>
+        </sdacontrols:SingleSelectionDataGrid>
+        <DockPanel LastChildFill="False" Grid.Row="1">
+            <Button x:Name="mBtnAddBudget" 
+                    Style="{StaticResource btnAddEntry}"
+                    Margin="3,3,0,0"  
+                    DockPanel.Dock="Right"
+                    Click="mBtnAddBudget_Click">
+                <Button.Content>
+                    <Image Source="/Resources/add.png" Style="{StaticResource btnImage}" />
+                </Button.Content>
+            </Button>
+        </DockPanel>
+    </Grid>
+</UserControl>

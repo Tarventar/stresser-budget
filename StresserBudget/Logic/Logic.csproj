@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="OxyPlot, Version=1.0.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
+      <HintPath>..\packages\OxyPlot.Core.1.0.0\lib\net45\OxyPlot.dll</HintPath>
+    </Reference>
     <Reference Include="SdaWpfLib">
       <HintPath>..\references\SdaWpfLib\SdaWpfLib.dll</HintPath>
     </Reference>
@@ -49,12 +52,14 @@
     <Compile Include="DataManagers\DauerauftragDataManager.cs" />
     <Compile Include="DataManagers\BudgetDataManager.cs" />
     <Compile Include="DataManagers\KontoDataManager.cs" />
+    <Compile Include="Extensions\BudgetPlotExtensions.cs" />
     <Compile Include="MoneyManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\BaseStatusVm.cs" />
     <Compile Include="ViewModels\BuchungVm.cs" />
     <Compile Include="ViewModels\DauerauftragVm.cs" />
     <Compile Include="ViewModels\BudgetVm.cs" />
+    <Compile Include="ViewModels\IPlotRenderer.cs" />
     <Compile Include="ViewModels\KontoVm.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -63,6 +68,8 @@
       <Name>DataAccess</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

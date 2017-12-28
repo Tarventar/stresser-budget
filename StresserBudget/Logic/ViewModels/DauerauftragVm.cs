@@ -86,6 +86,7 @@ namespace Logic.ViewModels
             {
                 this.Row.GueltigAb = value;
                 this.ChangingRow(nameof(GueltigAb));
+                this.NotifyPropertyChanged(nameof(GueltigAbDisplay));
             }
         }
 
@@ -99,6 +100,23 @@ namespace Logic.ViewModels
             {
                 this.Row.GueltigBis = value;
                 this.ChangingRow(nameof(GueltigBis));
+                this.NotifyPropertyChanged(nameof(GueltigBisDisplay));
+            }
+        }
+
+        public string GueltigAbDisplay
+        {
+            get
+            {
+                return this.GueltigAb.ToString("dd.MM.yyyy");
+            }
+        }
+
+        public string GueltigBisDisplay
+        {
+            get
+            {
+                return this.GueltigBis.ToString("dd.MM.yyyy");
             }
         }
 
@@ -108,7 +126,7 @@ namespace Logic.ViewModels
             {
                 return this.Row.Lauftag;
             }
-            internal set
+            set
             {
                 this.Row.Lauftag = value;
                 this.ChangingRow(nameof(Lauftag));
@@ -125,7 +143,47 @@ namespace Logic.ViewModels
             {
                 this.Row.Betrag = value;
                 this.ChangingRow(nameof(Betrag));
+                this.NotifyPropertyChanged(nameof(BetragDisplay));
             }
+        }
+
+        public decimal BetragDisplay
+        {
+            get
+            {
+                return MoneyManager.GetFrankenRappen(this.Row.Betrag, true);
+            }
+            set
+            {
+                this.Betrag = Convert.ToInt32(value * 100);
+            }
+        }
+
+        public void Save()
+        {
+            if (this.RowStatus == DtoStatus.Created)
+            {
+                this.mBudgetVm.AddDauerauftragVm(this);
+            }
+            else if (this.RowStatus == DtoStatus.Deleted)
+            {
+                this.mBudgetVm.Dauerauftraege.Remove(this);
+            }
+
+            if (this.RowStatus != DtoStatus.Unchanged)
+            {
+                DataManager.Dauerauftrag.SaveDauerauftrag(this);
+            }
+        }
+
+        public void ReloadFromDb()
+        {
+            if (this.RowStatus == DtoStatus.Created)
+            {
+                return;
+            }
+
+            DataManager.Dauerauftrag.Reload(this);
         }
 
         protected override IEnumerable<string> ValidateYourself()
@@ -145,9 +203,12 @@ namespace Logic.ViewModels
                 this.NotifyPropertyChanged(nameof(IdBudget));
                 this.NotifyPropertyChanged(nameof(Bezeichnung));
                 this.NotifyPropertyChanged(nameof(GueltigAb));
+                this.NotifyPropertyChanged(nameof(GueltigAbDisplay));
                 this.NotifyPropertyChanged(nameof(GueltigBis));
+                this.NotifyPropertyChanged(nameof(GueltigBisDisplay));
                 this.NotifyPropertyChanged(nameof(Lauftag));
                 this.NotifyPropertyChanged(nameof(Betrag));
+                this.NotifyPropertyChanged(nameof(BetragDisplay));
             }
         }
     }

@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="StresserBudget.Components.BudgetControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:StresserBudget.Components"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             Loaded="UserControl_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="2*" />
+        </Grid.RowDefinitions>
+        <local:BudgetListControl x:Name="mBudgetListControl" Grid.Row="0" 
+                                 SelectionChanged="mBudgetListControl_SelectionChanged"/>
+        <TabControl Grid.Row="1">
+            <TabItem Header="Saldo-Verlauf">
+                <local:BudgetVisualizerControl x:Name="mBudgetVisualizerControl" AutoRender="True">
+                    <local:BudgetVisualizerControl.SupportedModes>
+                        <x:Array Type="{x:Type sys:String}">
+                            <sys:String>Saldoverlauf</sys:String>
+                            <sys:String>InExkasso</sys:String>
+                        </x:Array>
+                    </local:BudgetVisualizerControl.SupportedModes>
+                </local:BudgetVisualizerControl>
+            </TabItem>
+            <TabItem Header="Buchungen">
+                <local:BuchungListControl x:Name="mBuchungListControl"/>
+            </TabItem>
+            <TabItem Header="Daueraufträge">
+                <local:DauerauftragListControl x:Name="mDauerauftragListControl"/>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>

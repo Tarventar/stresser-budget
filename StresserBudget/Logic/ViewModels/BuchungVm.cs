@@ -89,6 +89,14 @@ namespace Logic.ViewModels
             }
         }
 
+        public string DatumDisplay
+        {
+            get
+            {
+                return this.Datum.ToString("dd.MM.yyyy");
+            }
+        }
+
         public int Betrag
         {
             get
@@ -100,6 +108,66 @@ namespace Logic.ViewModels
                 this.Row.Betrag = value;
                 this.ChangingRow(nameof(Betrag));
             }
+        }
+
+        public decimal BetragDisplay
+        {
+            get
+            {
+                return MoneyManager.GetFrankenRappen(this.Row.Betrag, true);
+            }
+            set
+            {
+                this.Betrag = Convert.ToInt32(value * 100);
+            }
+        }
+
+        public string Bemerkung
+        {
+            get
+            {
+                return this.Row.Bemerkung;
+            }
+            set
+            {
+                this.Row.Bemerkung = value;
+                this.ChangingRow(nameof(Bemerkung));
+            }
+        }
+
+        public string IstDauerauftrag
+        {
+            get
+            {
+                return this.Row.IDDauerauftrag > -1 ? "Ja" : "Nein";
+            }
+        }
+
+        public void Save()
+        {
+            if (this.RowStatus == DtoStatus.Created)
+            {
+                this.mBudgetVm.AddBuchungVm(this);
+            }
+            else if (this.RowStatus == DtoStatus.Deleted)
+            {
+                this.mBudgetVm.Buchungen.Remove(this);
+            }
+
+            if (this.RowStatus != DtoStatus.Unchanged)
+            {
+                DataManager.Buchung.SaveBuchung(this);
+            }
+        }
+
+        public void ReloadFromDb()
+        {
+            if (this.RowStatus == DtoStatus.Created)
+            {
+                return;
+            }
+
+            DataManager.Buchung.Reload(this);
         }
 
         protected override IEnumerable<string> ValidateYourself()
@@ -119,7 +187,11 @@ namespace Logic.ViewModels
                 this.NotifyPropertyChanged(nameof(IdBudget));
                 this.NotifyPropertyChanged(nameof(Bezeichnung));
                 this.NotifyPropertyChanged(nameof(Datum));
+                this.NotifyPropertyChanged(nameof(DatumDisplay));
                 this.NotifyPropertyChanged(nameof(Betrag));
+                this.NotifyPropertyChanged(nameof(BetragDisplay));
+                this.NotifyPropertyChanged(nameof(Bemerkung));
+                this.NotifyPropertyChanged(nameof(IstDauerauftrag));
             }
         }
     }

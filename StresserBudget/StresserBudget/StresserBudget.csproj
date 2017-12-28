@@ -34,10 +34,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="OxyPlot, Version=1.0.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
+      <HintPath>..\packages\OxyPlot.Core.1.0.0\lib\net45\OxyPlot.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.Wpf, Version=1.0.0.0, Culture=neutral, PublicKeyToken=75e952ba404cdbb0, processorArchitecture=MSIL">
+      <HintPath>..\packages\OxyPlot.Wpf.1.0.0\lib\net45\OxyPlot.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="SdaWpfLib">
       <HintPath>..\references\SdaWpfLib\SdaWpfLib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -57,6 +64,42 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Components\BuchungListControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\BudgetControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\BudgetListControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\BudgetVisualizerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\DauerauftragListControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\KontoControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\EditBuchungDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\EditDauerauftragDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\RenameDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -64,6 +107,33 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Components\BuchungListControl.xaml.cs">
+      <DependentUpon>BuchungListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\BudgetControl.xaml.cs">
+      <DependentUpon>BudgetControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\BudgetListControl.xaml.cs">
+      <DependentUpon>BudgetListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\BudgetVisualizerControl.xaml.cs">
+      <DependentUpon>BudgetVisualizerControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\DauerauftragListControl.xaml.cs">
+      <DependentUpon>DauerauftragListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\KontoControl.xaml.cs">
+      <DependentUpon>KontoControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\EditBuchungDialog.xaml.cs">
+      <DependentUpon>EditBuchungDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\EditDauerauftragDialog.xaml.cs">
+      <DependentUpon>EditDauerauftragDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\RenameDialog.xaml.cs">
+      <DependentUpon>RenameDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -88,6 +158,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -97,9 +168,23 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\add.png" />
+    <Resource Include="Resources\bearbeiten.png" />
+    <Resource Include="Resources\cancel.png" />
+    <Resource Include="Resources\okay.png" />
+    <Resource Include="Resources\remove.png" />
+    <Resource Include="Resources\suchen.png" />
+    <Resource Include="Resources\dauerauftrag.png" />
     <Content Include="SeedDb\StresserBudget.accdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Logic\Logic.csproj">
+      <Project>{04129369-B894-4515-9386-789A4F164AAA}</Project>
+      <Name>Logic</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

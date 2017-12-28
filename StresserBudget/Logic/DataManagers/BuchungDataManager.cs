@@ -32,6 +32,18 @@ namespace Logic.DataManagers
             return lResult;
         }
 
+        internal void Reload(BuchungVm aBuchungVm)
+        {
+            if (aBuchungVm.Id < 0)
+            {
+                return;
+            }
+
+            // Reload from Database
+            var lRow = mDb.Buchung.GetSingleRow(aBuchungVm.Id, false);
+            aBuchungVm.Row = lRow;
+        }
+
         internal void SaveBuchung(BuchungVm aBuchungVm)
         {
             if (!aBuchungVm.Validate().IsValid)

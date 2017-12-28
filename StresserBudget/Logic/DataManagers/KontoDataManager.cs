@@ -18,6 +18,14 @@ namespace Logic.DataManagers
             this.mDb = aDb;
         }
 
+        public KontoVm CreateKonto(string aBezeichnung)
+        {
+            return new KontoVm()
+            {
+                Bezeichnung = aBezeichnung
+            };
+        }
+
         public IEnumerable<KontoVm> GetTable()
         {
             List<KontoVm> lResult = new List<KontoVm>();
@@ -29,7 +37,7 @@ namespace Logic.DataManagers
             return lResult;
         }
 
-        internal void SaveKonto(KontoVm aKontoVm)
+        public void SaveKonto(KontoVm aKontoVm)
         {
             if (!aKontoVm.Validate().IsValid)
             {

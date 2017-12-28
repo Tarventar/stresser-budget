@@ -4,6 +4,17 @@
              xmlns:local="clr-namespace:StresserBudget"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!--<ResourceDictionary Source="/themes/Theme.xaml" />-->
+                <ResourceDictionary Source="/PresentationFramework.Aero;V4.0.0.0;31bf3856ad364e35;component\themes/aero.normalcolor.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/SdaWpfLib;component/XamlRes/Image.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/SdaWpfLib;component/XamlRes/Button.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/SdaWpfLib;component/XamlRes/DataGrid.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/SdaWpfLib;component/XamlRes/ErrorNotification.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/SdaWpfLib;component/XamlRes/TextElements.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/SdaWpfLib;component/XamlRes/ToolTip.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

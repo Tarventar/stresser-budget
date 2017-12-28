@@ -5,11 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataAccess.Dto;
+using Logic.Extensions;
+using OxyPlot;
+using OxyPlot.Axes;
 using SdaWpfLib.ViewModelBase;
 
 namespace Logic.ViewModels
 {
-    public class KontoVm : BaseStatusVm
+    public class KontoVm : BaseStatusVm, IPlotRenderer
     {
         private KontoRow mRow;
         private ObservableCollection<BudgetVm> mBudgetVms = null;
@@ -77,6 +80,61 @@ namespace Logic.ViewModels
                 this.Row.Bezeichnung = value;
                 this.ChangingRow(nameof(Bezeichnung));
             }
+        }
+
+        public BudgetVm CreateBudget(string aBezeichnung)
+        {
+            var lBudget = new BudgetVm(this)
+            {
+                Bezeichnung = aBezeichnung
+            };
+
+            this.Budgets.Add(lBudget);
+
+            if (this.Id >= 0)
+            {
+                // Direkt speichern
+                DataManager.Budget.SaveBudget(lBudget);
+            }
+
+            return lBudget;
+        }
+
+        public PlotModel RenderPlot(string aMode, DateTime aStartDate, DateTime aEndDate)
+        {
+            if (aMode.ToLowerInvariant() != "saldoverlauf")
+            {
+                throw new ArgumentException("Konto unterstützt nur Modus 'SaldoVerlauf'.", nameof(aMode));
+            }
+
+            PlotModel lPlotModel = new PlotModel();
+
+            var lDtAxis = new DateTimeAxis()
+            {
+                Position = AxisPosition.Bottom,
+                StringFormat = "dd.MM.yy",
+                Key = "X",
+            };
+
+            var lYaxis = new LinearAxis()
+            {
+                Position = AxisPosition.Left,
+                ExtraGridlines = new double[] { 0 },
+                ExtraGridlineColor = OxyColors.DarkRed,
+                ExtraGridlineStyle = LineStyle.LongDash,
+                Key = "Y"
+            };
+
+            lPlotModel.Axes.Clear();
+            lPlotModel.Axes.Add(lDtAxis);
+            lPlotModel.Axes.Add(lYaxis);
+
+            foreach (var lBudget in this.Budgets)
+            {
+                lPlotModel.Series.Add(lBudget.CreateSaldoChangeStairLine(aStartDate, aEndDate, true));
+            }
+
+            return lPlotModel;
         }
 
         protected override IEnumerable<string> ValidateYourself()

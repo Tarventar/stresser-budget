@@ -4,9 +4,30 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StresserBudget"
+        xmlns:comp="clr-namespace:StresserBudget.Components"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Stressers Budget" Height="800" Width="1024">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <comp:KontoControl x:Name="mKontoControl" Grid.Row="0" 
+                           KontoSelected="mKontoControl_KontoSelected"/>
+        <TabControl Grid.Row="1">
+            <TabItem Header="Budget">
+                <comp:BudgetControl x:Name="mBudgetControl" />
+            </TabItem>
+            <TabItem Header="Kontoverlauf">
+                <comp:BudgetVisualizerControl x:Name="mVisualizerControl">
+                    <comp:BudgetVisualizerControl.SupportedModes>
+                        <x:Array Type="{x:Type sys:String}">
+                            <sys:String>Saldoverlauf</sys:String>
+                        </x:Array>
+                    </comp:BudgetVisualizerControl.SupportedModes>
+                </comp:BudgetVisualizerControl>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

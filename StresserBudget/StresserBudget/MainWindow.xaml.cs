@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Logic.ViewModels;
 
 namespace StresserBudget
 {
@@ -23,6 +24,12 @@ namespace StresserBudget
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void mKontoControl_KontoSelected(object sender, SdaWpfLib.EvArgs.VmEventArgs e)
+        {
+            this.mBudgetControl.KontoVm = e.GetVm<KontoVm>();
+            this.mVisualizerControl.PlotRenderer = this.mBudgetControl.KontoVm;
         }
     }
 }
